@@ -39,7 +39,7 @@ void updatecache(Cache **cache, int setindex, int associativity, int ix){
     cache[setindex][ix].freq=1;
    
 }
- /*Since I have my frequncies down... All i have to do is check for the MAXIMUM frequency number and remove that because that was the least recently used*/
+ /*Now that I have my frequncies down... All i have to do is check for the MAXIMUM frequency number and remove that because that was the least recently used*/
 void lru(Cache **cache, int setindex ,int associativity, size_t tag){
     int maximum = cache[setindex][0].freq;
     int i, j=0;
@@ -240,12 +240,15 @@ Cache** createCache(int numberofsets, int associativity){
     return array;
 }
 
-/*Checks if the size is power of 2*/
+/*Checks if a number is power of 2.... this will be used for blocksize because blocksize has to be power of 2 according to the instructions given in the assignment*/
 int power(int x){
 	return x && (!(x&(x-1)));
 }
  
+ 
+
 int main(int argc, char** argv) {
+/*Few error checks of the arguments*/
     if (argc==2){
  
       if(strcmp(argv[1],"-h")==0){
@@ -385,6 +388,9 @@ int main(int argc, char** argv) {
             printf("L1 Cold misses: %d \n",L1_Coldmisses);
             printf("L2 Cold misses: %d \n",L2_Coldmisses);
             printf("L3 Cold misses: %d \n",L3_Coldmisses);
+            
+            
+      /* !!!!!!!!!!!!!!!!!! FIX THIS !!!!!!!!!!!!!!!!!!*/
 	int i;
 	for( i=0; i<numberofsets1; i++){	
 		free(L1[i]);
